@@ -1,0 +1,230 @@
+:root {
+  --tute-paper: #f7f7f4;
+  --tute-ink: #202020;
+  --tute-muted: #626262;
+  --tute-yellow: #fff275;
+  --tute-green: #00a884;
+  --tute-orange: #f47b20;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--tute-paper);
+}
+
+.mantine-AppShell-root {
+  background: var(--tute-paper);
+}
+
+.mantine-home-header {
+  background: rgba(247, 247, 244, 0.94);
+  border-bottom: 1px dotted rgba(32, 32, 32, 0.48);
+  backdrop-filter: blur(18px);
+}
+
+.mantine-home-logo img {
+  width: 148px;
+  display: block;
+}
+
+.mantine-home-search {
+  width: min(36vw, 520px);
+}
+
+.mantine-home-search input,
+.mantine-Input-input {
+  font-weight: 700;
+}
+
+.teacher-pill {
+  min-height: 44px;
+  padding: 4px 14px 4px 4px;
+  border: 1px solid rgba(32, 32, 32, 0.18);
+  border-radius: 999px;
+  background: #ffffff;
+}
+
+.mantine-home-navbar {
+  background: var(--tute-paper);
+  border-right: 1px dotted rgba(32, 32, 32, 0.48);
+}
+
+.mantine-home-navlink {
+  border-radius: 8px;
+  font-weight: 800;
+}
+
+.mantine-home-navlink[data-active] {
+  outline: 1px solid var(--tute-ink);
+  background: #ffffff;
+  color: var(--tute-ink);
+}
+
+.sidebar-summary,
+.dashboard-card,
+.mantine-stat-card,
+.soft-row {
+  border-color: rgba(32, 32, 32, 0.18) !important;
+}
+
+.mantine-home-main {
+  min-height: 100vh;
+  background:
+    repeating-linear-gradient(90deg, rgba(32, 32, 32, 0.025) 0 1px, transparent 1px 72px),
+    var(--tute-paper);
+}
+
+.page-intro,
+.stats-grid-mantine,
+.dashboard-grid-mantine {
+  padding-inline: clamp(20px, 4vw, 54px);
+}
+
+.page-intro {
+  padding-top: 34px;
+  padding-bottom: 26px;
+}
+
+.home-display-title {
+  margin: 0 0 10px;
+  font-size: clamp(2.8rem, 6vw, 6.8rem);
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.eyebrow-text {
+  margin-bottom: 8px;
+  color: var(--tute-green);
+  font-size: 0.78rem;
+  font-weight: 900;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.stats-grid-mantine {
+  padding-bottom: 18px;
+}
+
+.dashboard-grid-mantine {
+  padding-bottom: 18px;
+}
+
+.mantine-stat-card,
+.dashboard-card {
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.mantine-stat-card {
+  min-height: 160px;
+}
+
+.mantine-stat-card h2 {
+  margin-top: 14px;
+  margin-bottom: 8px;
+  font-size: 3rem;
+  line-height: 0.9;
+}
+
+.mantine-yellow-button {
+  color: var(--tute-ink);
+  background: var(--tute-yellow);
+  border: 1px solid var(--tute-ink);
+  font-weight: 900;
+}
+
+.mantine-yellow-button:hover {
+  color: var(--tute-ink);
+  background: #f8ea45;
+  box-shadow: 0 8px 0 rgba(32, 32, 32, 0.12);
+}
+
+.lesson-row-mantine {
+  background: var(--tute-paper);
+}
+
+.lesson-row-mantine.active {
+  background: var(--tute-yellow);
+  border-color: var(--tute-ink) !important;
+}
+
+.schedule-card-mantine h2,
+.dashboard-card h2 {
+  font-size: clamp(1.55rem, 3vw, 2.6rem);
+  line-height: 1;
+}
+
+.assignment-card-mantine {
+  background:
+    linear-gradient(135deg, rgba(255, 242, 117, 0.54), rgba(255, 255, 255, 0.96)),
+    #ffffff;
+}
+
+.soft-row {
+  background: var(--tute-paper);
+}
+
+.tuition-row-mantine .mantine-Group-root > div {
+  min-width: 0;
+  flex: 1;
+}
+
+.tuition-row-mantine .mantine-Text-root:last-child {
+  white-space: nowrap;
+}
+
+.bar-visual {
+  height: 170px;
+  display: flex;
+  align-items: end;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid rgba(32, 32, 32, 0.16);
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.bar-visual span {
+  flex: 1;
+  border-radius: 6px 6px 0 0;
+  background: linear-gradient(180deg, var(--tute-orange), #2f80ed);
+}
+
+@media (max-width: 62em) {
+  .mantine-home-search {
+    width: min(52vw, 520px);
+  }
+
+  .home-display-title {
+    font-size: 3.8rem;
+  }
+}
+
+@media (max-width: 48em) {
+  .mantine-home-logo img {
+    width: 132px;
+  }
+
+  .teacher-pill {
+    padding-right: 4px;
+  }
+
+  .home-display-title {
+    font-size: 2.8rem;
+  }
+
+  .page-intro,
+  .stats-grid-mantine,
+  .dashboard-grid-mantine {
+    padding-inline: 18px;
+  }
+
+  .page-intro {
+    padding-top: 28px;
+  }
+}

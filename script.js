@@ -1,6 +1,8 @@
 const navToggle = document.querySelector(".nav-toggle");
 const topNav = document.querySelector(".top-nav");
 const headerCta = document.querySelector(".header-cta");
+const homeMenuToggle = document.querySelector(".home-menu-toggle");
+const homeSidebar = document.querySelector(".home-sidebar");
 
 navToggle?.addEventListener("click", () => {
   const isOpen = navToggle.getAttribute("aria-expanded") === "true";
@@ -15,6 +17,21 @@ topNav?.querySelectorAll("a").forEach((link) => {
     navToggle?.setAttribute("aria-expanded", "false");
     topNav.classList.remove("open");
     headerCta?.classList.remove("open");
+    document.body.classList.remove("menu-open");
+  });
+});
+
+homeMenuToggle?.addEventListener("click", () => {
+  const isOpen = homeMenuToggle.getAttribute("aria-expanded") === "true";
+  homeMenuToggle.setAttribute("aria-expanded", String(!isOpen));
+  homeSidebar?.classList.toggle("open", !isOpen);
+  document.body.classList.toggle("menu-open", !isOpen);
+});
+
+homeSidebar?.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    homeMenuToggle?.setAttribute("aria-expanded", "false");
+    homeSidebar.classList.remove("open");
     document.body.classList.remove("menu-open");
   });
 });
