@@ -972,6 +972,8 @@ p {
 .integration-cloud {
   position: absolute;
   inset: 70px 7vw;
+  z-index: 0;
+  pointer-events: none;
 }
 
 .integration-cloud span {
@@ -1030,9 +1032,14 @@ p {
 }
 
 .integration-cloud span:nth-child(8) {
-  top: 55%;
-  left: 26%;
+  top: 18%;
+  left: 6%;
   color: var(--pink);
+}
+
+.integration-section .center-heading {
+  position: relative;
+  z-index: 1;
 }
 
 .ai-section {
