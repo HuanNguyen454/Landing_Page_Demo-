@@ -45,8 +45,18 @@
       </div>
     </header>
 
+    <nav class="landing-rail" aria-label="Điều hướng nhanh">
+      <a class="active" href="#overview" data-rail-target="overview">Mở đầu</a>
+      <a href="#product" data-rail-target="product">Sản phẩm</a>
+      <a href="#modules" data-rail-target="modules">Module</a>
+      <a href="#workflow" data-rail-target="workflow">Quy trình</a>
+      <a href="#integration" data-rail-target="integration">Kết nối</a>
+      <a href="#voices" data-rail-target="voices">Đánh giá</a>
+      <a href="#start" data-rail-target="start">Bắt đầu</a>
+    </nav>
+
     <main id="top">
-      <section class="hero" aria-labelledby="hero-title">
+      <section class="hero" id="overview" aria-labelledby="hero-title">
         <div class="hero-scene" aria-hidden="true">
           <div class="dash-window dash-window-main">
             <div class="window-top">
@@ -99,135 +109,135 @@
         </div>
 
         <div class="hero-content">
-          <p class="eyebrow">TuteClass cho gia sư & giáo viên dạy thêm</p>
-          <h1 id="hero-title">Quản lý lớp học thêm cá nhân, gọn hơn và sống động hơn.</h1>
+          <p class="eyebrow">TuteClass · quản lý lớp học thêm thông minh cùng AI</p>
+          <h1 id="hero-title">Quản lý lớp học thêm thông minh cho giáo viên và học sinh.</h1>
           <p>
-            Gom lịch dạy, học sinh, điểm danh, học phí, bài tập và tài liệu vào một không gian trực quan,
-            thân thiện với nhịp làm việc mỗi ngày của giáo viên.
+            TuteClass gom lịch học, bài tập, tài liệu, học phí, điểm danh và trao đổi lớp vào một nền tảng
+            dễ dùng, giúp giáo viên vận hành lớp gọn hơn và học sinh theo dõi việc học rõ ràng hơn.
           </p>
           <div class="hero-actions">
-            <a class="button button-yellow" href="home.html">Mở trang home <span class="arrow-icon">↗</span></a>
+            <a class="button button-yellow" href="home.html">Xem dashboard <span class="arrow-icon">↗</span></a>
             <a class="button button-outline" href="#modules">Xem tính năng</a>
           </div>
         </div>
       </section>
 
       <section class="logo-marquee" aria-label="Điểm nổi bật">
-        <span>Lớp học</span>
+        <span>Giáo viên</span>
         <span>Học sinh</span>
-        <span>Lịch dạy</span>
-        <span>Điểm danh</span>
-        <span>Học phí</span>
+        <span>AI hỗ trợ</span>
+        <span>Lịch học</span>
         <span>Bài tập</span>
         <span>Tài liệu</span>
+        <span>Trao đổi</span>
       </section>
 
       <section class="section intro-section" id="product">
         <div class="section-copy reveal">
-          <p class="eyebrow">Một bảng điều khiển cho mọi lớp</p>
-          <h2>Trang quản lý được thiết kế để giáo viên mở lên là biết ngay hôm nay cần làm gì.</h2>
+          <p class="eyebrow">Vấn đề đang gặp</p>
+          <h2>Quản lý lớp bằng sổ tay, Excel và tin nhắn rời rạc khiến giáo viên dễ bỏ sót việc quan trọng.</h2>
           <p>
-            TuteClass ưu tiên dữ liệu quan trọng trước: lớp sắp dạy, học sinh vắng, khoản học phí cần nhắc,
-            bài tập đến hạn và tài liệu vừa gửi.
+            Khi lịch học, bài tập, học phí, tài liệu và câu hỏi của học sinh nằm ở nhiều nơi khác nhau,
+            giáo viên mất nhiều thời gian để kiểm tra, nhắc việc và tổng hợp tiến độ.
           </p>
         </div>
         <div class="feature-board reveal">
           <article>
             <span class="tile-icon tile-blue">01</span>
-            <h3>Lớp học rõ ràng</h3>
-            <p>Quản lý từng lớp theo môn, ca học, sĩ số và trạng thái hoạt động.</p>
+            <h3>Dữ liệu lớp học phân tán</h3>
+            <p>Lịch học, danh sách học sinh, tài liệu và trao đổi thường nằm ở nhiều file hoặc nhiều nhóm chat.</p>
           </article>
           <article>
             <span class="tile-icon tile-orange">02</span>
-            <h3>Học sinh có hồ sơ</h3>
-            <p>Lưu lớp đang học, liên hệ phụ huynh, lịch sử điểm danh và tiến độ.</p>
+            <h3>Khó theo dõi tiến độ</h3>
+            <p>Giáo viên khó nhìn nhanh ai đi học đều, ai chưa nộp bài, ai đang cần hỗ trợ thêm.</p>
           </article>
           <article>
             <span class="tile-icon tile-green">03</span>
-            <h3>Học phí dễ theo dõi</h3>
-            <p>Nhìn nhanh đã đóng, chưa đóng, quá hạn và tổng thu theo tháng.</p>
+            <h3>Nhắc việc thủ công</h3>
+            <p>Việc nhắc học phí, nhắc bài tập, gửi tài liệu và báo lịch học tốn nhiều thao tác lặp lại.</p>
           </article>
         </div>
       </section>
 
       <section class="module-gallery" id="modules">
         <div class="center-heading reveal">
-          <p class="eyebrow">Kho module tùy biến</p>
-          <h2>Những mảnh ghép quen thuộc của một lớp học thêm.</h2>
-          <p>Style lấy cảm hứng từ landing animation: nhiều khối nhỏ, dễ lướt, tạo cảm giác sản phẩm đang chuyển động.</p>
+          <p class="eyebrow">Giải pháp TuteClass</p>
+          <h2>Một nền tảng cho giáo viên, gia sư và học sinh cùng theo dõi lớp học.</h2>
+          <p>Các module được gom theo đúng công việc hằng ngày: quản lý lớp, giao bài, chia sẻ tài liệu, trao đổi và theo dõi tiến độ.</p>
         </div>
         <div class="module-grid reveal" aria-label="Danh sách module">
-          <article><span>Lịch</span><b>Timeline ca học</b></article>
-          <article><span>HS</span><b>Danh sách học sinh</b></article>
-          <article><span>Điểm</span><b>Điểm danh nhanh</b></article>
-          <article><span>Phí</span><b>Nhắc học phí</b></article>
-          <article><span>Bài</span><b>Bài tập về nhà</b></article>
-          <article><span>PDF</span><b>Tài liệu lớp</b></article>
-          <article><span>AI</span><b>Gợi ý nhận xét</b></article>
-          <article><span>BC</span><b>Báo cáo tháng</b></article>
-          <article><span>Cha mẹ</span><b>Liên hệ phụ huynh</b></article>
-          <article><span>Ca</span><b>Đổi lịch học</b></article>
-          <article><span>Test</span><b>Kiểm tra nhanh</b></article>
-          <article><span>Share</span><b>Chia sẻ tài liệu</b></article>
+          <article><span>Tổng quan</span><b>Việc cần xử lý hôm nay</b></article>
+          <article><span>Lớp học</span><b>Thông tin từng lớp</b></article>
+          <article><span>Lịch</span><b>Lịch dạy và lịch học</b></article>
+          <article><span>Bài tập</span><b>Giao bài, nộp bài, chấm điểm</b></article>
+          <article><span>Tài liệu</span><b>Kho học liệu theo lớp</b></article>
+          <article><span>Trao đổi</span><b>Hỏi đáp và thông báo lớp</b></article>
+          <article><span>Học phí</span><b>Theo dõi đã nộp/chưa nộp</b></article>
+          <article><span>Điểm danh</span><b>Ghi nhận chuyên cần</b></article>
+          <article><span>AI</span><b>Gợi ý nhận xét buổi học</b></article>
+          <article><span>Báo cáo</span><b>Tổng hợp tiến độ lớp</b></article>
+          <article><span>Phụ huynh</span><b>Chia sẻ tình hình học tập</b></article>
+          <article><span>Thông báo</span><b>Nhắc lịch và deadline</b></article>
         </div>
       </section>
 
       <section class="section workflow-section" id="workflow">
         <div class="center-heading reveal">
-          <p class="eyebrow">Quy trình mỗi ngày</p>
-          <h2>Từ trước buổi học đến sau buổi học, mọi bước đều có nơi để xử lý.</h2>
+          <p class="eyebrow">Quy trình sử dụng</p>
+          <h2>Từ tạo lớp đến theo dõi tiến độ, mọi thao tác được gom vào một luồng rõ ràng.</h2>
         </div>
         <div class="workflow-grid reveal">
           <article>
             <span>1</span>
-            <h3>Chuẩn bị lớp</h3>
-            <p>Xem ca dạy, tài liệu cần dùng và ghi chú của buổi trước.</p>
+            <h3>Tạo lớp</h3>
+            <p>Thêm môn học, ca học, học sinh và thông tin học phí ban đầu.</p>
           </article>
           <article>
             <span>2</span>
-            <h3>Điểm danh</h3>
-            <p>Ghi nhận có mặt, vắng, đi muộn và lưu nhận xét ngay sau buổi học.</p>
+            <h3>Sắp lịch</h3>
+            <p>Quản lý lịch dạy theo tuần, nhắc buổi học sắp tới và đổi lịch khi cần.</p>
           </article>
           <article>
             <span>3</span>
             <h3>Giao bài</h3>
-            <p>Tạo bài tập, đính kèm tài liệu và theo dõi trạng thái nộp bài.</p>
+            <p>Đăng bài tập, tài liệu, hạn nộp và theo dõi học sinh đã hoàn thành.</p>
           </article>
           <article>
             <span>4</span>
-            <h3>Thu học phí</h3>
-            <p>Theo dõi khoản thu theo từng học sinh, từng lớp và từng tháng.</p>
+            <h3>Đo tiến độ</h3>
+            <p>Theo dõi điểm danh, học phí, kết quả học tập và nhận gợi ý từ AI.</p>
           </article>
         </div>
       </section>
 
-      <section class="integration-section section">
+      <section class="integration-section section" id="integration">
         <div class="integration-cloud reveal" aria-hidden="true">
-          <span>Calendar</span>
-          <span>Zalo</span>
-          <span>Excel</span>
-          <span>PDF</span>
-          <span>Email</span>
-          <span>Drive</span>
-          <span>Pay</span>
-          <span>Quiz</span>
+          <span>Giáo viên</span>
+          <span>Học sinh</span>
+          <span>Lịch học</span>
+          <span>Bài tập</span>
+          <span>Tài liệu</span>
+          <span>Hỏi đáp</span>
+          <span>Học phí</span>
+          <span>AI</span>
         </div>
         <div class="center-heading reveal">
-          <p class="eyebrow">Kết nối công việc quen thuộc</p>
-          <h2>Đưa thông tin lớp học đến nơi giáo viên cần.</h2>
-          <p>TuteClass có thể mở rộng để nhắc lịch, xuất báo cáo, gửi tài liệu và chia sẻ trạng thái lớp với phụ huynh.</p>
+          <p class="eyebrow">Không chỉ dành cho giáo viên</p>
+          <h2>Học sinh cũng có nơi xem lịch, nhận bài, nộp bài và trao đổi với giáo viên.</h2>
+          <p>TuteClass giúp hai phía dùng chung một nguồn dữ liệu: giáo viên quản lý lớp, học sinh theo dõi việc học và phụ huynh dễ nắm tình hình hơn.</p>
         </div>
       </section>
 
-      <section class="testimonial-section section">
+      <section class="testimonial-section section" id="voices">
         <div class="center-heading reveal">
-          <p class="eyebrow">Gần gũi với giáo viên</p>
-          <h2>Thiết kế cho người dạy thêm một mình nhưng vẫn muốn làm việc chuyên nghiệp.</h2>
+          <p class="eyebrow">Theo đúng cách lớp học thêm vận hành</p>
+          <h2>TuteClass giúp lớp học nhỏ vận hành chuyên nghiệp hơn mà không biến giáo viên thành quản trị viên.</h2>
         </div>
         <div class="testimonial-grid reveal">
           <article>
             <div class="avatar">TL</div>
-            <p>“Tôi không còn phải mở nhiều file Excel để kiểm tra học phí và điểm danh từng lớp.”</p>
+            <p>“Tôi có thể xem lịch dạy, học phí và bài cần chấm trong cùng một màn hình trước khi vào lớp.”</p>
             <span>Cô Lan, gia sư Toán</span>
           </article>
           <article>
@@ -240,7 +250,7 @@
           </article>
           <article>
             <div class="avatar avatar-blue">MH</div>
-            <p>“Giao diện giống một studio nhỏ cho lớp học, dễ nhìn và không bị cảm giác phần mềm kế toán.”</p>
+            <p>“Học sinh không còn hỏi lại tài liệu ở đâu, bài nào đến hạn, vì mọi thứ đã nằm trong lớp.”</p>
             <span>Thầy Minh, giáo viên Lý</span>
           </article>
           <article class="image-card">
@@ -253,11 +263,28 @@
         </div>
       </section>
 
-      <section class="final-banner">
+      <section class="final-banner" id="start">
         <div class="final-inner reveal">
-          <h2>Tạo một lớp học thêm vận hành gọn gàng hơn ngay từ hôm nay.</h2>
-          <p>Landing page này tập trung vào cảm giác sản phẩm thật: trẻ trung, gần gũi, rõ tính năng và có nhiều điểm nhìn trực quan.</p>
-          <a class="button button-primary" href="#top">Quay lại đầu trang <span class="arrow-icon">↑</span></a>
+          <h2>Bắt đầu với TuteClass ngay hôm nay.</h2>
+          <p>Thiết lập lớp học trong vài phút, quản lý lịch dạy, học phí, bài tập, tài liệu và trao đổi tập trung một nơi.</p>
+          <div class="start-steps">
+            <article>
+              <span>1</span>
+              <b>Đăng ký tài khoản</b>
+              <small>Dùng email hoặc số điện thoại để tạo tài khoản giáo viên.</small>
+            </article>
+            <article>
+              <span>2</span>
+              <b>Thiết lập lớp học</b>
+              <small>Thêm học sinh, lịch học, học phí và tài liệu cho từng lớp.</small>
+            </article>
+            <article>
+              <span>3</span>
+              <b>Vận hành mỗi ngày</b>
+              <small>Điểm danh, giao bài, nhận nộp bài và theo dõi tiến độ học tập.</small>
+            </article>
+          </div>
+          <a class="button button-primary" href="home.html">Mở trang home <span class="arrow-icon">↗</span></a>
         </div>
       </section>
     </main>

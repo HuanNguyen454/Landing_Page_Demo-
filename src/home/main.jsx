@@ -10,14 +10,14 @@ import {
   Box,
   Button,
   Card,
-  Divider,
+  Checkbox,
+  Drawer,
   Group,
   MantineProvider,
   NavLink,
   Paper,
   RingProgress,
   ScrollArea,
-  SimpleGrid,
   Stack,
   Text,
   TextInput,
@@ -26,16 +26,20 @@ import {
   createTheme,
 } from "@mantine/core";
 import {
-  IconArrowUpRight,
   IconBook2,
   IconCalendar,
+  IconChartLine,
+  IconChevronDown,
   IconChevronLeft,
   IconChevronRight,
   IconClipboardCheck,
   IconCoin,
   IconHome2,
+  IconNotes,
   IconPlus,
+  IconReceipt,
   IconSearch,
+  IconStar,
   IconUsers,
 } from "@tabler/icons-react";
 import React, { useState } from "react";
@@ -88,7 +92,7 @@ const theme = createTheme({
     ],
   },
   primaryColor: "tuteBlue",
-  defaultRadius: 8,
+  defaultRadius: 10,
 });
 
 const navItems = [
@@ -100,85 +104,239 @@ const navItems = [
   { icon: IconClipboardCheck, label: "Bài tập" },
 ];
 
-const summaryCards = [
-  { label: "Ca dạy hôm nay", value: "3", detail: "Ca gần nhất lúc 18:00", icon: IconCalendar },
-  { label: "Cần điểm danh", value: "1", detail: "Toán 9A đang chờ", icon: IconClipboardCheck },
-  { label: "Học phí cần nhắc", value: "24", detail: "3 khoản quá hạn", icon: IconCoin },
-  { label: "Bài cần chấm", value: "17", detail: "Ưu tiên Toán 9A", icon: IconBook2 },
+const classOptions = [
+  {
+    id: "math-9a",
+    name: "Toán 9A",
+    teacher: "Cô Lan",
+    subject: "Đại số · Chương 4",
+    room: "Phòng online 2",
+    students: 30,
+    noteTone: "paper-yellow",
+    metrics: {
+      average: "8.2",
+      averageBadge: "+0.3",
+      averageDetail: "Cập nhật 12/05",
+      paid: "28",
+      paidSuffix: "/30 học sinh",
+      paidBadge: "93%",
+      paidDetail: "Còn 2 bạn chưa nộp",
+      tasks: "6",
+      tasksBadge: "Gấp",
+      next: "Thứ 5, 14:00",
+      nextDetail: "Còn 2 ngày nữa",
+      progress: "18",
+      progressSuffix: "/20 buổi",
+      progressBadge: "90%",
+      progressDetail: "Còn 2 buổi cuối kỳ",
+    },
+    schedule: [
+      { day: "15", weekday: "TH 5", title: "Toán 9A · Chương 4", meta: "14:00 - 15:30 · Phòng online 2" },
+      { day: "16", weekday: "TH 6", title: "Họp phụ huynh", meta: "19:00 - 20:00 · Trực tuyến" },
+      { day: "18", weekday: "CN", title: "Toán 9A · Ôn giữa kỳ", meta: "09:00 - 11:00 · Phòng online 2" },
+    ],
+    health: [
+      { label: "Vững kiến thức", value: "20 học sinh (66.7%)", color: "#2fa36f", ratio: 66.7 },
+      { label: "Cần hỗ trợ", value: "7 học sinh (23.3%)", color: "#df8b24", ratio: 23.3 },
+      { label: "Nguy cơ", value: "3 học sinh (10%)", color: "#d95b70", ratio: 10 },
+    ],
+    stats: [
+      { value: "96%", label: "Tỷ lệ nộp bài đúng hạn" },
+      { value: "90%", label: "Đi học đầy đủ tuần này" },
+    ],
+    todos: [
+      { text: "Chấm bài kiểm tra chương 3", done: true },
+      { text: "Nhắc học sinh nộp bài tập tuần 18", done: true },
+      { text: "Soạn bài luyện tập Đại số", done: true },
+      { text: "Gửi thông báo khóa ôn cho phụ huynh", tag: "Hôm nay", tone: "rose" },
+      { text: "Chuẩn bị slide bài mới", tag: "Thứ 5", tone: "orange" },
+    ],
+  },
+  {
+    id: "web-k12",
+    name: "Web Foundation K12",
+    teacher: "Cô Lan",
+    subject: "HTML/CSS · Layout cơ bản",
+    room: "Lab online",
+    students: 24,
+    noteTone: "paper-blue",
+    metrics: {
+      average: "8.6",
+      averageBadge: "+0.5",
+      averageDetail: "Cập nhật 18/05",
+      paid: "22",
+      paidSuffix: "/24 học sinh",
+      paidBadge: "92%",
+      paidDetail: "Còn 2 bạn chưa nộp",
+      tasks: "4",
+      tasksBadge: "Mới",
+      next: "Thứ 6, 19:00",
+      nextDetail: "Còn 3 ngày nữa",
+      progress: "12",
+      progressSuffix: "/16 buổi",
+      progressBadge: "75%",
+      progressDetail: "Còn 4 buổi dự án",
+    },
+    schedule: [
+      { day: "16", weekday: "TH 6", title: "Web K12 · Flexbox", meta: "19:00 - 20:30 · Lab online" },
+      { day: "19", weekday: "TH 2", title: "Review landing page", meta: "19:00 - 20:30 · Trực tuyến" },
+      { day: "21", weekday: "TH 4", title: "Mini project", meta: "19:00 - 21:00 · Lab online" },
+    ],
+    health: [
+      { label: "Theo kịp bài", value: "17 học sinh (70.8%)", color: "#2fa36f", ratio: 70.8 },
+      { label: "Cần sửa bài", value: "5 học sinh (20.9%)", color: "#df8b24", ratio: 20.9 },
+      { label: "Chưa nộp project", value: "2 học sinh (8.3%)", color: "#d95b70", ratio: 8.3 },
+    ],
+    stats: [
+      { value: "88%", label: "Bài tập nộp đúng hạn" },
+      { value: "92%", label: "Tham gia buổi học tuần này" },
+    ],
+    todos: [
+      { text: "Duyệt landing page của nhóm 2", done: true },
+      { text: "Gửi tài liệu CSS Grid", done: true },
+      { text: "Tổng hợp lỗi layout thường gặp", tag: "Hôm nay", tone: "rose" },
+      { text: "Chuẩn bị demo responsive", tag: "Thứ 6", tone: "orange" },
+    ],
+  },
+  {
+    id: "physics-9a",
+    name: "Vật lý 9A",
+    teacher: "Thầy Minh",
+    subject: "Điện học · Ôn tập",
+    room: "Phòng A2",
+    students: 28,
+    noteTone: "paper-pink",
+    metrics: {
+      average: "7.8",
+      averageBadge: "+0.1",
+      averageDetail: "Cập nhật 10/05",
+      paid: "25",
+      paidSuffix: "/28 học sinh",
+      paidBadge: "89%",
+      paidDetail: "Còn 3 bạn chưa nộp",
+      tasks: "8",
+      tasksBadge: "Gấp",
+      next: "Thứ 7, 09:00",
+      nextDetail: "Còn 4 ngày nữa",
+      progress: "15",
+      progressSuffix: "/20 buổi",
+      progressBadge: "75%",
+      progressDetail: "Cần bù 1 buổi thí nghiệm",
+    },
+    schedule: [
+      { day: "17", weekday: "TH 7", title: "Vật lý 9A · Điện trở", meta: "09:00 - 10:30 · Phòng A2" },
+      { day: "19", weekday: "TH 2", title: "Chữa đề số 2", meta: "18:00 - 19:30 · Phòng A2" },
+      { day: "22", weekday: "TH 5", title: "Thực hành đo mạch", meta: "18:00 - 20:00 · Phòng lab" },
+    ],
+    health: [
+      { label: "Nắm chắc kiến thức", value: "16 học sinh (57.1%)", color: "#2fa36f", ratio: 57.1 },
+      { label: "Cần luyện thêm", value: "9 học sinh (32.2%)", color: "#df8b24", ratio: 32.2 },
+      { label: "Nguy cơ hổng bài", value: "3 học sinh (10.7%)", color: "#d95b70", ratio: 10.7 },
+    ],
+    stats: [
+      { value: "82%", label: "Bài tập nộp đúng hạn" },
+      { value: "86%", label: "Đi học đầy đủ tuần này" },
+    ],
+    todos: [
+      { text: "Chấm bài điện trở tương đương", done: true },
+      { text: "Nhắc nhóm 3 hoàn thành báo cáo", tag: "Hôm nay", tone: "rose" },
+      { text: "Chuẩn bị bộ câu hỏi ôn tập", tag: "Thứ 7", tone: "orange" },
+    ],
+  },
+  {
+    id: "literature-9a",
+    name: "Ngữ văn 9A",
+    teacher: "Cô Hoa",
+    subject: "Nghị luận xã hội",
+    room: "Trực tuyến",
+    students: 26,
+    noteTone: "paper-violet",
+    metrics: {
+      average: "8.0",
+      averageBadge: "+0.2",
+      averageDetail: "Cập nhật 14/05",
+      paid: "24",
+      paidSuffix: "/26 học sinh",
+      paidBadge: "92%",
+      paidDetail: "Còn 2 bạn chưa nộp",
+      tasks: "5",
+      tasksBadge: "Mới",
+      next: "CN, 08:00",
+      nextDetail: "Cuối tuần này",
+      progress: "14",
+      progressSuffix: "/18 buổi",
+      progressBadge: "78%",
+      progressDetail: "Còn 4 buổi luyện đề",
+    },
+    schedule: [
+      { day: "18", weekday: "CN", title: "Ngữ văn 9A · Dàn ý nghị luận", meta: "08:00 - 09:30 · Trực tuyến" },
+      { day: "20", weekday: "TH 3", title: "Chữa bài viết số 3", meta: "19:00 - 20:30 · Trực tuyến" },
+      { day: "23", weekday: "TH 6", title: "Luyện đề đọc hiểu", meta: "19:00 - 21:00 · Trực tuyến" },
+    ],
+    health: [
+      { label: "Viết ổn định", value: "18 học sinh (69.2%)", color: "#2fa36f", ratio: 69.2 },
+      { label: "Cần sửa lập luận", value: "6 học sinh (23.1%)", color: "#df8b24", ratio: 23.1 },
+      { label: "Thiếu bài viết", value: "2 học sinh (7.7%)", color: "#d95b70", ratio: 7.7 },
+    ],
+    stats: [
+      { value: "91%", label: "Bài viết nộp đúng hạn" },
+      { value: "88%", label: "Tham gia thảo luận" },
+    ],
+    todos: [
+      { text: "Nhận xét bài nghị luận xã hội", done: true },
+      { text: "Gửi tài liệu mẫu mở bài", done: true },
+      { text: "Chọn đề luyện viết tuần sau", tag: "Hôm nay", tone: "rose" },
+    ],
+  },
 ];
 
-const lessons = [
-  {
-    time: "18:00",
-    title: "Toán 9A",
-    topic: "Ôn hệ phương trình",
-    meta: "16 học sinh - Phòng Zoom A",
-    status: "Sắp bắt đầu",
-    action: "Điểm danh",
-    active: true,
-  },
-  {
-    time: "19:30",
-    title: "Hóa 10",
-    topic: "Cân bằng phản ứng",
-    meta: "12 học sinh - Tài liệu đã gửi",
-    status: "Đã chuẩn bị",
-    action: "Giao bài",
-  },
-  {
-    time: "20:45",
-    title: "Lý 11",
-    topic: "Điện trường",
-    meta: "14 học sinh - 2 bạn xin nghỉ",
-    status: "Cần xem lại",
-    action: "Xem lớp",
-  },
-];
-
-const focusTasks = [
-  {
-    title: "Nhắc học phí",
-    detail: "Gửi tin nhắn cho 3 phụ huynh trước 20:00.",
-    badge: "Ưu tiên",
-    color: "tuteOrange",
-  },
-  {
-    title: "Chấm bài Toán 9A",
-    detail: "17 bài đang chờ nhận xét trước ca học.",
-    badge: "17 bài",
-    color: "tuteOrange",
-  },
-  {
-    title: "Theo dõi chuyên cần",
-    detail: "Mai Anh vắng 2 buổi liên tiếp, nên gọi phụ huynh.",
-    badge: "Cần gọi",
-    color: "red",
-  },
-  {
-    title: "Tài liệu buổi học",
-    detail: "Slide Hóa 10 đã sẵn sàng, còn thiếu file bài tập.",
-    badge: "Thiếu file",
-    color: "gray",
-  },
-];
-
-const tuitionRows = [
-  { name: "Mai Anh", amount: "1.200.000đ", note: "Quá hạn 3 ngày", status: "Cần nhắc" },
-  { name: "Quốc Huy", amount: "900.000đ", note: "Đến hạn hôm nay", status: "Hôm nay" },
-  { name: "Bảo Trâm", amount: "1.500.000đ", note: "Nhắc phụ huynh", status: "Theo dõi" },
-];
-
-const classRows = [
-  { name: "Toán 9A", count: "16 học sinh", schedule: "Thứ 2, 4, 6", progress: "Đang ôn thi" },
-  { name: "Hóa 10", count: "12 học sinh", schedule: "Thứ 3, 5", progress: "Tuần 8/12" },
-  { name: "Lý 11", count: "14 học sinh", schedule: "Cuối tuần", progress: "Cần bổ sung bài" },
-];
-
-const students = [
-  { initials: "MA", name: "Mai Anh", note: "Vắng 2 buổi liên tiếp", tag: "Chuyên cần" },
-  { initials: "QH", name: "Quốc Huy", note: "Chưa nộp bài tuần này", tag: "Bài tập" },
-  { initials: "BT", name: "Bảo Trâm", note: "Cần nhắc học phí", tag: "Học phí" },
-];
+function buildMetricCards(classroom) {
+  return [
+    {
+      icon: IconStar,
+      tone: "green",
+      label: "Điểm trung bình lớp",
+      value: classroom.metrics.average,
+      detail: classroom.metrics.averageDetail,
+      badge: classroom.metrics.averageBadge,
+    },
+    {
+      icon: IconReceipt,
+      tone: "orange",
+      label: "Học phí đã nộp",
+      value: classroom.metrics.paid,
+      suffix: classroom.metrics.paidSuffix,
+      detail: classroom.metrics.paidDetail,
+      badge: classroom.metrics.paidBadge,
+    },
+    {
+      icon: IconClipboardCheck,
+      tone: "rose",
+      label: "Bài cần chấm",
+      value: classroom.metrics.tasks,
+      suffix: "bài",
+      detail: "Trước buổi học tới",
+      badge: classroom.metrics.tasksBadge,
+    },
+    {
+      icon: IconCalendar,
+      tone: "blue",
+      label: "Lịch dạy tiếp theo",
+      value: classroom.metrics.next,
+      detail: classroom.metrics.nextDetail,
+      badge: "Sắp tới",
+    },
+    {
+      icon: IconChartLine,
+      tone: "violet",
+      label: "Tiến độ dạy",
+      value: classroom.metrics.progress,
+      suffix: classroom.metrics.progressSuffix,
+      detail: classroom.metrics.progressDetail,
+      badge: classroom.metrics.progressBadge,
+    },
+  ];
+}
 
 function Header() {
   return (
@@ -217,7 +375,7 @@ function Header() {
   );
 }
 
-function Navbar({ isCollapsed, onToggle }) {
+function Navbar({ isCollapsed, onToggle, classroom }) {
   return (
     <AppShell.Navbar p="xs" className={isCollapsed ? "mantine-home-navbar is-collapsed" : "mantine-home-navbar"}>
       <Group justify={isCollapsed ? "center" : "flex-end"} className="nav-toggle-row">
@@ -253,131 +411,138 @@ function Navbar({ isCollapsed, onToggle }) {
         <Text className="section-kicker">Hôm nay</Text>
         <Title order={4}>3 ca dạy</Title>
         <Text c="dimmed" size="sm">
-          Ca gần nhất bắt đầu lúc 18:00 với lớp Toán 9A.
+          Ca gần nhất bắt đầu lúc {classroom.metrics.next.split(", ").pop()} với lớp {classroom.name}.
         </Text>
       </Paper>
     </AppShell.Navbar>
   );
 }
 
-function SectionTitle({ kicker, title, action }) {
+function ClassOverviewBar({ classroom, onOpen }) {
   return (
-    <Group justify="space-between" align="end" gap="lg" mb="sm">
-      <div>
-        <Text className="section-kicker">{kicker}</Text>
-        <Title order={2} className="section-title">
+    <div className="class-overview-bar">
+      <button type="button" className="class-title-switch" onClick={onOpen} aria-label="Đổi lớp đang xem">
+        <div>
+          <Text className="class-breadcrumb">Tổng quan lớp</Text>
+          <Title order={1}>
+            {classroom.name}
+            <span>{classroom.subject}</span>
+          </Title>
+          <Text className="class-subline">
+            {classroom.students} học sinh · {classroom.room} · {classroom.teacher}
+          </Text>
+        </div>
+        <span className="class-switch-chevron">
+          <IconChevronDown size={18} />
+        </span>
+      </button>
+
+      <Group className="class-quick-meta" gap="xs" wrap="nowrap">
+        <Badge variant="light" color="tuteBlue" radius="md">
+          Lớp đang xem
+        </Badge>
+        <Text fw={800}>{classroom.metrics.next}</Text>
+      </Group>
+    </div>
+  );
+}
+
+function ClassDrawer({ opened, onClose, classes, selectedId, onSelect }) {
+  return (
+    <Drawer
+      opened={opened}
+      onClose={onClose}
+      title="Lớp của tôi"
+      padding="lg"
+      size={320}
+      radius="md"
+      classNames={{
+        content: "class-drawer-content",
+        header: "class-drawer-header",
+        title: "class-drawer-title",
+      }}
+    >
+      <Stack gap="lg" className="class-note-stack">
+        {classes.map((item) => (
+          <button
+            type="button"
+            key={item.id}
+            className={`class-note ${item.noteTone}${item.id === selectedId ? " active" : ""}`}
+            onClick={() => {
+              onSelect(item.id);
+              onClose();
+            }}
+          >
+            <span className="class-note-title">{item.name}</span>
+            <span className="class-note-subject">{item.subject}</span>
+            <span className="class-note-meta">{item.students} học sinh · {item.teacher}</span>
+          </button>
+        ))}
+        <button type="button" className="class-note add-note">
+          <IconPlus size={18} />
+          Thêm lớp
+        </button>
+      </Stack>
+    </Drawer>
+  );
+}
+
+function MetricCard({ item }) {
+  return (
+    <Card withBorder className={`metric-card tone-${item.tone}`}>
+      <Group justify="space-between" align="start" mb="md" wrap="nowrap">
+        <ThemeIcon className="metric-icon" variant="light" radius="md" size={44}>
+          <item.icon size={23} stroke={1.8} />
+        </ThemeIcon>
+        <Badge className="metric-badge" variant="light">
+          {item.badge}
+        </Badge>
+      </Group>
+      <Text className="metric-label">{item.label}</Text>
+      <Group gap={5} align="baseline" wrap="nowrap">
+        <Title order={2} className="metric-value">
+          {item.value}
+        </Title>
+        {item.suffix ? <Text className="metric-suffix">{item.suffix}</Text> : null}
+      </Group>
+      <Text className="metric-detail">{item.detail}</Text>
+    </Card>
+  );
+}
+
+function PanelHeader({ icon: Icon, title, action, tone = "blue" }) {
+  return (
+    <Group justify="space-between" align="center" mb="md" wrap="nowrap">
+      <Group gap="sm" wrap="nowrap">
+        <ThemeIcon className={`panel-icon tone-${tone}`} variant="light" radius="md" size={40}>
+          <Icon size={20} />
+        </ThemeIcon>
+        <Title order={2} className="panel-title">
           {title}
         </Title>
-      </div>
-      {action}
+      </Group>
+      {action ? <Text className="panel-action">{action}</Text> : null}
     </Group>
   );
 }
 
-function SummaryCard({ item }) {
+function SchedulePanel({ items }) {
   return (
-    <Card withBorder className="summary-card">
-      <Group justify="space-between" align="start" wrap="nowrap">
-        <div>
-          <Text className="metric-label">{item.label}</Text>
-          <Title order={3}>{item.value}</Title>
-          <Text c="dimmed" size="sm">
-            {item.detail}
-          </Text>
-        </div>
-        <ThemeIcon variant="light" color="tuteBlue" radius="md" size={40}>
-          <item.icon size={21} />
-        </ThemeIcon>
-      </Group>
-    </Card>
-  );
-}
-
-function NextLessonCard() {
-  const lesson = lessons[0];
-
-  return (
-    <Card withBorder className="next-lesson-card">
-      <Group justify="space-between" align="start" mb="lg">
-        <div>
-          <Text className="section-kicker">Ca sắp tới</Text>
-          <Title order={2}>{lesson.title}</Title>
-          <Text c="dimmed">{lesson.topic}</Text>
-        </div>
-        <Badge color="tuteBlue" variant="light" size="lg">
-          {lesson.status}
-        </Badge>
-      </Group>
-
-      <Group align="end" justify="space-between" gap="xl" className="lesson-focus-row">
-        <div>
-          <Text className="time-label">{lesson.time}</Text>
-          <Text c="dimmed" size="sm">
-            {lesson.meta}
-          </Text>
-        </div>
-        <Group gap="sm">
-          <Button color="tuteBlue" radius="xl" rightSection={<IconArrowUpRight size={16} />}>
-            {lesson.action}
-          </Button>
-          <Button variant="outline" color="ink" radius="xl">
-            Mở lớp
-          </Button>
-        </Group>
-      </Group>
-
-      <Divider my="lg" />
-
-      <SimpleGrid cols={{ base: 1, sm: 3 }} spacing="sm">
-        <Paper p="sm" withBorder className="quiet-cell">
-          <Text fw={700}>Tài liệu</Text>
-          <Text size="sm" c="dimmed">
-            Đã gửi 2 file
-          </Text>
-        </Paper>
-        <Paper p="sm" withBorder className="quiet-cell">
-          <Text fw={700}>Điểm danh</Text>
-          <Text size="sm" c="dimmed">
-            Chưa mở
-          </Text>
-        </Paper>
-        <Paper p="sm" withBorder className="quiet-cell">
-          <Text fw={700}>Bài tập</Text>
-          <Text size="sm" c="dimmed">
-            17 bài cần chấm
-          </Text>
-        </Paper>
-      </SimpleGrid>
-    </Card>
-  );
-}
-
-function FocusTasksCard() {
-  return (
-    <Card withBorder className="dashboard-card">
-      <SectionTitle
-        kicker="Cần xử lý"
-        title="Việc quan trọng"
-        action={
-          <Button variant="subtle" color="tuteBlue" radius="xl" rightSection={<IconArrowUpRight size={15} />}>
-            Xem tất cả
-          </Button>
-        }
-      />
-      <Stack gap="sm">
-        {focusTasks.map((task) => (
-          <Paper key={task.title} p="sm" withBorder className="task-row">
-            <Group justify="space-between" align="start" gap="sm" wrap="nowrap">
-              <div>
-                <Text fw={700}>{task.title}</Text>
-                <Text size="sm" c="dimmed">
-                  {task.detail}
-                </Text>
-              </div>
-              <Badge color={task.color} variant="light">
-                {task.badge}
-              </Badge>
-            </Group>
+    <Card withBorder className="dashboard-panel schedule-panel">
+      <PanelHeader icon={IconCalendar} title="Lịch sắp tới" action="Cả tuần" tone="violet" />
+      <Stack gap="md">
+        {items.map((item) => (
+          <Paper key={`${item.day}-${item.title}`} withBorder className="schedule-row">
+            <div className="schedule-date">
+              <b>{item.day}</b>
+              <span>{item.weekday}</span>
+            </div>
+            <div>
+              <Text fw={800}>{item.title}</Text>
+              <Text c="dimmed" size="sm">
+                {item.meta}
+              </Text>
+            </div>
           </Paper>
         ))}
       </Stack>
@@ -385,179 +550,84 @@ function FocusTasksCard() {
   );
 }
 
-function LessonListCard() {
+function ClassStatusPanel({ classroom }) {
   return (
-    <Card withBorder className="dashboard-card">
-      <SectionTitle
-        kicker="Lịch dạy"
-        title="Hôm nay"
-        action={
-          <Button variant="outline" color="ink" radius="xl">
-            Xem tuần
-          </Button>
-        }
-      />
-      <Stack gap="sm">
-        {lessons.map((lesson) => (
-          <Paper key={lesson.time} p="md" withBorder className={lesson.active ? "lesson-row active" : "lesson-row"}>
-            <Group justify="space-between" gap="md" wrap="nowrap">
-              <div className="lesson-time">{lesson.time}</div>
-              <Box flex={1}>
-                <Group gap="xs" mb={2}>
-                  <Text fw={800}>{lesson.title}</Text>
-                  <Badge variant="light" color={lesson.active ? "tuteBlue" : "gray"}>
-                    {lesson.status}
-                  </Badge>
-                </Group>
-                <Text size="sm" c="dimmed">
-                  {lesson.topic} - {lesson.meta}
-                </Text>
-              </Box>
-              <Button color={lesson.active ? "tuteBlue" : "gray"} variant={lesson.active ? "filled" : "light"} radius="xl">
-                {lesson.action}
-              </Button>
-            </Group>
-          </Paper>
-        ))}
-      </Stack>
-    </Card>
-  );
-}
-
-function AttendanceCard() {
-  return (
-    <Card withBorder className="dashboard-card compact-card">
-      <SectionTitle kicker="Điểm danh" title="Toán 9A" />
-      <Group justify="space-between" align="center" gap="lg">
+    <Card withBorder className="dashboard-panel status-panel">
+      <PanelHeader icon={IconUsers} title="Tình trạng lớp học" action="Xem chi tiết" tone="blue" />
+      <div className="status-content">
         <RingProgress
-          size={132}
-          thickness={12}
+          size={136}
+          thickness={18}
           roundCaps
-          sections={[{ value: 87, color: "tuteBlue.5" }]}
+          sections={classroom.health.map((item) => ({ value: item.ratio, color: item.color }))}
           label={
-            <Text ta="center" fw={800} fz={24}>
-              87%
-            </Text>
+            <Stack align="center" gap={0}>
+              <Text fw={900} fz={28} lh={1}>
+                {classroom.students}
+              </Text>
+              <Text c="dimmed" size="sm">
+                học sinh
+              </Text>
+            </Stack>
           }
         />
-        <Stack gap={8} flex={1}>
-          <Group justify="space-between">
-            <Text size="sm" c="dimmed">
-              Có mặt
-            </Text>
-            <Text fw={700}>14</Text>
-          </Group>
-          <Group justify="space-between">
-            <Text size="sm" c="dimmed">
-              Muộn
-            </Text>
-            <Text fw={700}>1</Text>
-          </Group>
-          <Group justify="space-between">
-            <Text size="sm" c="dimmed">
-              Nghỉ
-            </Text>
-            <Text fw={700}>1</Text>
-          </Group>
+        <Stack gap="md" className="health-list">
+          {classroom.health.map((item) => (
+            <Group key={item.label} gap="sm" align="start" wrap="nowrap">
+              <span className="health-dot" style={{ background: item.color }} />
+              <div>
+                <Text fw={800}>{item.label}</Text>
+                <Text c="dimmed" size="sm">
+                  {item.value}
+                </Text>
+              </div>
+            </Group>
+          ))}
         </Stack>
+      </div>
+      <div className="status-stat-grid">
+        {classroom.stats.map((item) => (
+          <Paper key={item.label} withBorder className="status-stat">
+            <Text className="status-stat-value">{item.value}</Text>
+            <Text c="dimmed" size="sm">
+              {item.label}
+            </Text>
+          </Paper>
+        ))}
+      </div>
+    </Card>
+  );
+}
+
+function TodoPanel({ items }) {
+  return (
+    <Card withBorder className="dashboard-panel todo-panel">
+      <Group justify="space-between" align="center" mb="md" wrap="nowrap">
+        <Group className="todo-tabs" gap={4} wrap="nowrap">
+          <button type="button" className="todo-tab active">
+            <IconClipboardCheck size={16} />
+            Việc cần làm
+          </button>
+          <button type="button" className="todo-tab">
+            <IconNotes size={16} />
+            Ghi chú
+          </button>
+        </Group>
+        <Text c="dimmed" fw={700}>
+          3/5
+        </Text>
       </Group>
-    </Card>
-  );
-}
-
-function TuitionCard() {
-  return (
-    <Card withBorder className="dashboard-card">
-      <SectionTitle
-        kicker="Học phí"
-        title="Khoản cần nhắc"
-        action={
-          <Button variant="outline" color="ink" radius="xl">
-            Gửi nhắc
-          </Button>
-        }
-      />
-      <Stack gap="sm">
-        {tuitionRows.map((row) => (
-          <Paper key={row.name} p="sm" withBorder className="data-row">
-            <Group justify="space-between" align="start" gap="sm" wrap="nowrap">
-              <div>
-                <Text fw={700}>{row.name}</Text>
-                <Text size="sm" c="dimmed">
-                  {row.note}
-                </Text>
-              </div>
-              <div className="right-data">
-                <Text fw={800}>{row.amount}</Text>
-                <Badge color="tuteOrange" variant="light">
-                  {row.status}
-                </Badge>
-              </div>
-            </Group>
-          </Paper>
-        ))}
-      </Stack>
-    </Card>
-  );
-}
-
-function ClassesCard() {
-  return (
-    <Card withBorder className="dashboard-card">
-      <SectionTitle kicker="Lớp học" title="Đang quản lý" />
-      <Stack gap="sm">
-        {classRows.map((row) => (
-          <Paper key={row.name} p="sm" withBorder className="data-row">
-            <Group justify="space-between" align="center" gap="sm">
-              <div>
-                <Text fw={800}>{row.name}</Text>
-                <Text size="sm" c="dimmed">
-                  {row.count} - {row.schedule}
-                </Text>
-              </div>
-              <Badge color="gray" variant="light">
-                {row.progress}
+      <Stack gap={0}>
+        {items.map((item) => (
+          <div key={item.text} className={item.done ? "todo-row done" : "todo-row"}>
+            <Checkbox checked={Boolean(item.done)} readOnly radius="md" color="teal" />
+            <Text className="todo-text">{item.text}</Text>
+            {item.tag ? (
+              <Badge className={`todo-badge tone-${item.tone}`} variant="light">
+                {item.tag}
               </Badge>
-            </Group>
-          </Paper>
-        ))}
-      </Stack>
-    </Card>
-  );
-}
-
-function StudentsCard() {
-  return (
-    <Card withBorder className="dashboard-card">
-      <SectionTitle
-        kicker="Học sinh"
-        title="Cần chú ý"
-        action={
-          <Button variant="outline" color="ink" radius="xl">
-            Xem tất cả
-          </Button>
-        }
-      />
-      <Stack gap="sm">
-        {students.map((student) => (
-          <Paper key={student.name} p="sm" withBorder className="data-row">
-            <Group justify="space-between" gap="sm" wrap="nowrap">
-              <Group gap="sm" wrap="nowrap">
-                <Avatar color="ink" radius="md">
-                  {student.initials}
-                </Avatar>
-                <div>
-                  <Text fw={700}>{student.name}</Text>
-                  <Text size="sm" c="dimmed">
-                    {student.note}
-                  </Text>
-                </div>
-              </Group>
-              <Badge color="gray" variant="light">
-                {student.tag}
-              </Badge>
-            </Group>
-          </Paper>
+            ) : null}
+          </div>
         ))}
       </Stack>
     </Card>
@@ -566,11 +636,15 @@ function StudentsCard() {
 
 function Dashboard() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
+  const [selectedClassId, setSelectedClassId] = useState(classOptions[0].id);
+  const [isClassDrawerOpen, setIsClassDrawerOpen] = useState(false);
+  const selectedClass = classOptions.find((item) => item.id === selectedClassId) ?? classOptions[0];
+  const metricCards = buildMetricCards(selectedClass);
 
   return (
     <MantineProvider theme={theme}>
       <AppShell
-        header={{ height: 76 }}
+        header={{ height: 64 }}
         navbar={{
           width: isSidebarCollapsed ? 76 : 208,
           breakpoint: "md",
@@ -579,58 +653,37 @@ function Dashboard() {
         padding={0}
       >
         <Header />
-        <Navbar isCollapsed={isSidebarCollapsed} onToggle={() => setIsSidebarCollapsed((value) => !value)} />
+        <Navbar
+          classroom={selectedClass}
+          isCollapsed={isSidebarCollapsed}
+          onToggle={() => setIsSidebarCollapsed((value) => !value)}
+        />
         <AppShell.Main className="mantine-home-main">
           <ScrollArea h="100%">
             <Box className="home-container">
-              <Group justify="space-between" align="center" gap="lg" className="page-heading">
-                <div>
-                  <Text className="section-kicker">Thứ bảy, 20/06</Text>
-                  <Title order={1}>Bảng điều khiển hôm nay</Title>
-                  <Text c="dimmed" className="page-heading-description">
-                    Chào cô Lan, các việc cần làm nhất đã được đưa lên đầu để cô theo dõi nhanh trước giờ dạy.
-                  </Text>
-                </div>
-                <Group gap="sm">
-                  <Button color="tuteBlue" radius="xl" rightSection={<IconArrowUpRight size={16} />}>
-                    Điểm danh nhanh
-                  </Button>
-                  <Button component="a" href="index.html" color="ink" variant="outline" radius="xl">
-                    Về landing
-                  </Button>
-                </Group>
-              </Group>
+              <ClassOverviewBar classroom={selectedClass} onOpen={() => setIsClassDrawerOpen(true)} />
 
-              <SimpleGrid cols={{ base: 1, sm: 2, xl: 4 }} spacing="sm" mb="md">
-                {summaryCards.map((item) => (
-                  <SummaryCard key={item.label} item={item} />
+              <div className="metric-grid">
+                {metricCards.map((item) => (
+                  <MetricCard key={item.label} item={item} />
                 ))}
-              </SimpleGrid>
-
-              <div className="priority-grid">
-                <NextLessonCard />
-                <FocusTasksCard />
               </div>
 
-              <SimpleGrid cols={{ base: 1, lg: 2 }} spacing="md" mt="md">
-                <Stack gap="md">
-                  <LessonListCard />
-                  <ClassesCard />
-                </Stack>
-                <Stack gap="md">
-                  <AttendanceCard />
-                  <TuitionCard />
-                  <StudentsCard />
-                </Stack>
-              </SimpleGrid>
-
-              <Divider my="xl" variant="dotted" />
-              <Text c="dimmed" size="sm" ta="center" pb="xl">
-                TuteClass Mantine dashboard - tập trung vào lịch dạy, học phí, điểm danh và học sinh cần theo dõi.
-              </Text>
+              <div className="home-dashboard-grid">
+                <SchedulePanel items={selectedClass.schedule} />
+                <ClassStatusPanel classroom={selectedClass} />
+                <TodoPanel items={selectedClass.todos} />
+              </div>
             </Box>
           </ScrollArea>
         </AppShell.Main>
+        <ClassDrawer
+          opened={isClassDrawerOpen}
+          onClose={() => setIsClassDrawerOpen(false)}
+          classes={classOptions}
+          selectedId={selectedClassId}
+          onSelect={setSelectedClassId}
+        />
       </AppShell>
     </MantineProvider>
   );

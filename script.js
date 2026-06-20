@@ -20,7 +20,7 @@ topNav?.querySelectorAll("a").forEach((link) => {
 });
 
 const revealGroups = document.querySelectorAll(
-  ".logo-marquee, .feature-board, .module-grid, .workflow-grid, .testimonial-grid, .site-footer nav"
+  ".logo-marquee, .feature-board, .module-grid, .workflow-grid, .testimonial-grid, .start-steps, .site-footer nav"
 );
 
 revealGroups.forEach((group) => {
@@ -55,4 +55,33 @@ if (!("IntersectionObserver" in window) || shouldReduceMotion) {
   );
 
   revealElements.forEach((el) => revealObserver.observe(el));
+}
+
+const railLinks = document.querySelectorAll(".landing-rail a[data-rail-target]");
+const railSections = Array.from(railLinks)
+  .map((link) => document.getElementById(link.dataset.railTarget))
+  .filter(Boolean);
+
+function setActiveRailLink(sectionId) {
+  railLinks.forEach((link) => {
+    link.classList.toggle("active", link.dataset.railTarget === sectionId);
+  });
+}
+
+if ("IntersectionObserver" in window && railLinks.length > 0) {
+  const railObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveRailLink(entry.target.id);
+        }
+      });
+    },
+    {
+      rootMargin: "-35% 0px -50% 0px",
+      threshold: 0,
+    }
+  );
+
+  railSections.forEach((section) => railObserver.observe(section));
 }
