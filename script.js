@@ -20,7 +20,7 @@ topNav?.querySelectorAll("a").forEach((link) => {
 });
 
 const revealGroups = document.querySelectorAll(
-  ".logo-marquee, .feature-board, .module-grid, .workflow-grid, .testimonial-grid, .start-steps, .site-footer nav"
+  ".logo-marquee, .feature-board, .module-grid, .workflow-grid, .testimonial-grid, .pain-board, .solution-cards, .show-tabs, .start-steps, .site-footer nav"
 );
 
 revealGroups.forEach((group) => {
@@ -85,3 +85,48 @@ if ("IntersectionObserver" in window && railLinks.length > 0) {
 
   railSections.forEach((section) => railObserver.observe(section));
 }
+
+let currentShowRole = "teacher";
+
+function updateShowRolePanels() {
+  document.querySelectorAll(".show-panel").forEach((panel) => {
+    panel.querySelectorAll(".show-role-panel").forEach((rolePanel) => {
+      rolePanel.classList.toggle(
+        "active",
+        panel.classList.contains("active") && rolePanel.dataset.showRole === currentShowRole
+      );
+    });
+  });
+}
+
+document.querySelectorAll(".role-btn").forEach((button) => {
+  button.addEventListener("click", () => {
+    currentShowRole = button.dataset.role;
+    document.querySelectorAll(".role-btn").forEach((item) => item.classList.remove("active"));
+    button.classList.add("active");
+    updateShowRolePanels();
+  });
+});
+
+document.querySelectorAll(".show-tab").forEach((button) => {
+  button.addEventListener("click", () => {
+    const panelId = button.dataset.tab;
+    document.querySelectorAll(".show-tab").forEach((item) => item.classList.remove("active"));
+    document.querySelectorAll(".show-panel").forEach((panel) => {
+      panel.classList.toggle("active", panel.dataset.panel === panelId);
+    });
+    button.classList.add("active");
+    updateShowRolePanels();
+  });
+});
+
+document.querySelectorAll(".start-role-btn").forEach((button) => {
+  button.addEventListener("click", () => {
+    const role = button.dataset.startRole;
+    document.querySelectorAll(".start-role-btn").forEach((item) => item.classList.remove("active"));
+    document.querySelectorAll(".start-role-panel").forEach((panel) => {
+      panel.classList.toggle("active", panel.dataset.startPanel === role);
+    });
+    button.classList.add("active");
+  });
+});
