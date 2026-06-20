@@ -1,18 +1,39 @@
 # TuteClass Creative Classroom Landing
 
-Landing page tĩnh cho sản phẩm web quản lý lớp học thêm cá nhân của TuteClass.
+Landing page va trang Home dashboard cho san pham quan ly lop hoc them ca nhan cua TuteClass.
 
-## Chạy trang
+## Chay local
 
-- Landing tĩnh: mở trực tiếp file `index.html` trong trình duyệt.
-- Home Mantine: chạy `npm install`, sau đó `npm run dev` và mở `/home.html`.
+```bash
+npm install
+npm run dev
+```
 
-## Cấu trúc
+Mo:
 
-- `index.html`: nội dung landing page
-- `home.html`: dashboard home sau đăng nhập dùng Mantine + React
-- `src/home/`: source React/Mantine cho home dashboard
-- `package.json`: cấu hình Vite, React và Mantine
-- `styles.css`: toàn bộ giao diện responsive
-- `script.js`: menu mobile, reveal animation, tab demo sản phẩm
-- `assets/tute-logo.png`: logo TuteClass do bạn cung cấp
+- Landing: `http://127.0.0.1:5173/`
+- Home: `http://127.0.0.1:5173/home.html`
+
+Neu cong `5173` dang ban, Vite se hien cong khac trong terminal.
+
+## Build
+
+```bash
+npm run build
+```
+
+Thu muc production se nam trong `dist/`.
+
+## Deploy GitHub Pages
+
+Repo da co workflow tai `.github/workflows/deploy.yml`.
+
+Sau khi push len GitHub:
+
+1. Vao repo tren GitHub.
+2. Mo `Settings` -> `Pages`.
+3. O `Build and deployment`, chon `Source: GitHub Actions`.
+4. Push vao branch `main` hoac `master`.
+5. Cho workflow `Deploy to GitHub Pages` chay xong, GitHub se hien URL Pages.
+
+Vite dang dung `base: "./"` de asset CSS/JS/logo chay dung tren GitHub Pages project URL.

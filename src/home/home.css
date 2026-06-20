@@ -1,28 +1,59 @@
 :root {
-  --tute-paper: #f7f7f4;
-  --tute-ink: #202020;
-  --tute-muted: #626262;
-  --tute-yellow: #fff275;
-  --tute-green: #00a884;
+  --tute-paper: #f6f6f1;
+  --tute-panel: #ffffff;
+  --tute-ink: #23231f;
+  --tute-muted: #66665d;
+  --tute-line: rgba(35, 35, 31, 0.14);
+  --tute-soft: #ecece4;
+  --tute-blue: #0d4c7e;
+  --tute-blue-dark: #083558;
+  --tute-blue-soft: #e8f2fb;
   --tute-orange: #f47b20;
+  --tute-orange-soft: #fff1e7;
+  --tute-shadow: 0 10px 24px rgba(35, 35, 31, 0.05);
 }
 
 * {
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
 body {
   margin: 0;
   background: var(--tute-paper);
+  color: var(--tute-ink);
+  font-family: "Be Vietnam Pro", Inter, Arial, sans-serif;
+  font-optical-sizing: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
 }
 
 .mantine-AppShell-root {
   background: var(--tute-paper);
+  font-family: "Be Vietnam Pro", Inter, Arial, sans-serif;
+}
+
+.mantine-AppShell-navbar,
+.mantine-AppShell-main {
+  transition:
+    width 0.24s ease,
+    padding-left 0.24s ease,
+    transform 0.24s ease;
 }
 
 .mantine-home-header {
-  background: rgba(247, 247, 244, 0.94);
-  border-bottom: 1px dotted rgba(32, 32, 32, 0.48);
+  background: rgba(246, 246, 241, 0.94);
+  border-bottom: 1px solid var(--tute-line);
   backdrop-filter: blur(18px);
 }
 
@@ -32,176 +63,271 @@ body {
 }
 
 .mantine-home-search {
-  width: min(36vw, 520px);
+  width: min(34vw, 520px);
 }
 
 .mantine-home-search input,
 .mantine-Input-input {
-  font-weight: 700;
+  font-family: "Be Vietnam Pro", Inter, Arial, sans-serif;
+  font-weight: 600;
 }
 
 .teacher-pill {
-  min-height: 44px;
+  min-height: 42px;
   padding: 4px 14px 4px 4px;
-  border: 1px solid rgba(32, 32, 32, 0.18);
+  border: 1px solid var(--tute-line);
   border-radius: 999px;
-  background: #ffffff;
+  background: var(--tute-panel);
+}
+
+.primary-action {
+  color: #ffffff;
+  background: var(--tute-blue);
+  border: 1px solid var(--tute-blue);
+  font-weight: 700;
+}
+
+.primary-action:hover {
+  color: #ffffff;
+  background: var(--tute-blue-dark);
 }
 
 .mantine-home-navbar {
   background: var(--tute-paper);
-  border-right: 1px dotted rgba(32, 32, 32, 0.48);
+  border-right: 1px solid var(--tute-line);
+  overflow: hidden;
+  transition:
+    width 0.24s ease,
+    min-width 0.24s ease,
+    transform 0.24s ease;
+}
+
+.nav-toggle-row {
+  min-height: 38px;
+  margin-bottom: 4px;
+}
+
+.nav-stack {
+  width: 100%;
 }
 
 .mantine-home-navlink {
+  min-height: 42px;
   border-radius: 8px;
-  font-weight: 800;
+  color: var(--tute-ink);
+  font-weight: 700;
+  transition:
+    background 0.18s ease,
+    padding 0.24s ease,
+    justify-content 0.24s ease;
 }
 
 .mantine-home-navlink[data-active] {
-  outline: 1px solid var(--tute-ink);
-  background: #ffffff;
+  background: var(--tute-panel);
+  box-shadow: inset 0 0 0 1px var(--tute-line);
   color: var(--tute-ink);
 }
 
+.mantine-home-navlink .mantine-NavLink-label,
+.mantine-home-navlink .mantine-NavLink-body {
+  transition:
+    opacity 0.18s ease,
+    width 0.24s ease,
+    margin 0.24s ease;
+  white-space: nowrap;
+}
+
+.mantine-home-navbar.is-collapsed .mantine-home-navlink {
+  min-height: 48px;
+  padding-inline: 8px !important;
+}
+
+.mantine-home-navbar.is-collapsed .mantine-NavLink-label,
+.mantine-home-navbar.is-collapsed .mantine-NavLink-body {
+  width: 0;
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.mantine-home-navbar.is-collapsed .mantine-NavLink-section {
+  margin-inline: auto !important;
+}
+
+.mantine-home-navbar.is-collapsed .sidebar-summary {
+  max-height: 0;
+  margin: auto 0 0;
+  padding: 0;
+  border-width: 0 !important;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translateY(8px);
+}
+
 .sidebar-summary,
+.summary-card,
 .dashboard-card,
-.mantine-stat-card,
-.soft-row {
-  border-color: rgba(32, 32, 32, 0.18) !important;
+.next-lesson-card,
+.quiet-cell,
+.task-row,
+.data-row {
+  border-color: var(--tute-line) !important;
+}
+
+.sidebar-summary,
+.summary-card,
+.dashboard-card,
+.next-lesson-card {
+  background: var(--tute-panel);
+  box-shadow: var(--tute-shadow);
+}
+
+.sidebar-summary {
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease,
+    max-height 0.24s ease,
+    padding 0.24s ease;
 }
 
 .mantine-home-main {
   min-height: 100vh;
-  background:
-    repeating-linear-gradient(90deg, rgba(32, 32, 32, 0.025) 0 1px, transparent 1px 72px),
-    var(--tute-paper);
+  background: var(--tute-paper);
 }
 
-.page-intro,
-.stats-grid-mantine,
-.dashboard-grid-mantine {
-  padding-inline: clamp(20px, 4vw, 54px);
+.home-container {
+  width: min(100%, 1440px);
+  margin-inline: auto;
+  padding: 28px clamp(20px, 3.2vw, 44px) 44px;
 }
 
-.page-intro {
-  padding-top: 34px;
-  padding-bottom: 26px;
+.page-heading {
+  margin-bottom: 12px;
 }
 
-.home-display-title {
-  margin: 0 0 10px;
-  font-size: clamp(2.8rem, 6vw, 6.8rem);
-  line-height: 0.92;
-  text-transform: uppercase;
+.page-heading h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.85rem, 3vw, 3.1rem);
+  line-height: 1.12;
   letter-spacing: 0;
 }
 
-.eyebrow-text {
-  margin-bottom: 8px;
-  color: var(--tute-green);
-  font-size: 0.78rem;
-  font-weight: 900;
+.page-heading-description {
+  max-width: min(980px, 68vw);
+  white-space: nowrap;
+}
+
+.section-kicker,
+.metric-label {
+  margin-bottom: 6px;
+  color: var(--tute-orange);
+  font-size: 0.72rem;
+  font-weight: 800;
   line-height: 1.4;
   text-transform: uppercase;
 }
 
-.stats-grid-mantine {
-  padding-bottom: 18px;
+.section-title {
+  margin: 0;
+  font-size: clamp(1.25rem, 1.8vw, 1.85rem);
+  line-height: 1.16;
+  letter-spacing: 0;
 }
 
-.dashboard-grid-mantine {
-  padding-bottom: 18px;
+.summary-card {
+  min-height: 122px;
+  padding: 18px;
 }
 
-.mantine-stat-card,
-.dashboard-card {
-  background: #ffffff;
-  box-shadow: none;
-}
-
-.mantine-stat-card {
-  min-height: 160px;
-}
-
-.mantine-stat-card h2 {
-  margin-top: 14px;
-  margin-bottom: 8px;
-  font-size: 3rem;
-  line-height: 0.9;
-}
-
-.mantine-yellow-button {
-  color: var(--tute-ink);
-  background: var(--tute-yellow);
-  border: 1px solid var(--tute-ink);
-  font-weight: 900;
-}
-
-.mantine-yellow-button:hover {
-  color: var(--tute-ink);
-  background: #f8ea45;
-  box-shadow: 0 8px 0 rgba(32, 32, 32, 0.12);
-}
-
-.lesson-row-mantine {
-  background: var(--tute-paper);
-}
-
-.lesson-row-mantine.active {
-  background: var(--tute-yellow);
-  border-color: var(--tute-ink) !important;
-}
-
-.schedule-card-mantine h2,
-.dashboard-card h2 {
-  font-size: clamp(1.55rem, 3vw, 2.6rem);
+.summary-card h3 {
+  margin: 8px 0 4px;
+  font-size: 2rem;
   line-height: 1;
 }
 
-.assignment-card-mantine {
-  background:
-    linear-gradient(135deg, rgba(255, 242, 117, 0.54), rgba(255, 255, 255, 0.96)),
-    #ffffff;
+.priority-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(360px, 0.65fr);
+  gap: 16px;
 }
 
-.soft-row {
-  background: var(--tute-paper);
+.next-lesson-card,
+.dashboard-card {
+  padding: 20px;
 }
 
-.tuition-row-mantine .mantine-Group-root > div {
-  min-width: 0;
-  flex: 1;
+.next-lesson-card h2 {
+  margin: 0 0 4px;
+  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+  line-height: 1.12;
 }
 
-.tuition-row-mantine .mantine-Text-root:last-child {
+.lesson-focus-row {
+  padding: 18px;
+  border: 1px solid var(--tute-line);
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--tute-blue-soft), #ffffff);
+}
+
+.time-label {
+  color: var(--tute-ink);
+  font-size: clamp(2.15rem, 4vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.quiet-cell,
+.task-row,
+.data-row {
+  background: #fbfbf8;
+}
+
+.task-row {
+  transition: background 0.16s ease, border-color 0.16s ease;
+}
+
+.task-row:hover,
+.data-row:hover {
+  background: #ffffff;
+  border-color: rgba(13, 76, 126, 0.28) !important;
+}
+
+.lesson-row {
+  background: #fbfbf8;
+}
+
+.lesson-row.active {
+  background: var(--tute-blue-soft);
+  border-color: rgba(13, 76, 126, 0.36) !important;
+}
+
+.lesson-time {
+  width: 70px;
+  color: var(--tute-ink);
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.compact-card {
+  min-height: 246px;
+}
+
+.right-data {
+  display: grid;
+  justify-items: end;
+  gap: 6px;
   white-space: nowrap;
 }
 
-.bar-visual {
-  height: 170px;
-  display: flex;
-  align-items: end;
-  gap: 12px;
-  padding: 18px;
-  border: 1px solid rgba(32, 32, 32, 0.16);
-  border-radius: 8px;
-  background: #ffffff;
-}
-
-.bar-visual span {
-  flex: 1;
-  border-radius: 6px 6px 0 0;
-  background: linear-gradient(180deg, var(--tute-orange), #2f80ed);
-}
-
-@media (max-width: 62em) {
-  .mantine-home-search {
-    width: min(52vw, 520px);
+@media (max-width: 74em) {
+  .priority-grid {
+    grid-template-columns: 1fr;
   }
 
-  .home-display-title {
-    font-size: 3.8rem;
+  .mantine-home-search {
+    width: min(44vw, 520px);
   }
 }
 
@@ -210,21 +336,115 @@ body {
     width: 132px;
   }
 
+  .mantine-AppShell-main {
+    padding-left: 0 !important;
+    padding-bottom: 86px;
+  }
+
+  .mantine-home-navbar,
+  .mantine-home-navbar.is-collapsed {
+    position: fixed !important;
+    top: auto !important;
+    left: 12px !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    width: calc(100% - 24px) !important;
+    min-width: 0 !important;
+    height: 64px !important;
+    min-height: 0 !important;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    padding: 8px !important;
+    border: 1px solid var(--tute-line) !important;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: 0 16px 34px rgba(35, 35, 31, 0.14);
+    backdrop-filter: blur(18px);
+    transform: none !important;
+  }
+
+  .nav-toggle-row,
+  .sidebar-summary {
+    display: none !important;
+  }
+
+  .nav-stack {
+    width: 100%;
+    flex-direction: row !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px !important;
+  }
+
+  .mantine-home-navbar .mantine-home-navlink {
+    flex: 1;
+    width: auto;
+    min-height: 48px;
+    height: 48px;
+    justify-content: center;
+    padding-inline: 0 !important;
+    border-radius: 12px;
+  }
+
+  .mantine-home-navbar .mantine-NavLink-label,
+  .mantine-home-navbar .mantine-NavLink-body {
+    display: none;
+  }
+
+  .mantine-home-navbar .mantine-NavLink-section {
+    margin-inline: auto !important;
+  }
+
   .teacher-pill {
     padding-right: 4px;
   }
 
-  .home-display-title {
-    font-size: 2.8rem;
+  .home-container {
+    padding: 22px 18px 112px;
   }
 
-  .page-intro,
-  .stats-grid-mantine,
-  .dashboard-grid-mantine {
-    padding-inline: 18px;
+  .page-heading {
+    align-items: flex-start;
   }
 
-  .page-intro {
-    padding-top: 28px;
+  .page-heading-description {
+    max-width: 100%;
+    white-space: normal;
+  }
+
+  .page-heading .mantine-Group-root {
+    width: 100%;
+  }
+
+  .page-heading .mantine-Button-root,
+  .lesson-focus-row .mantine-Button-root {
+    flex: 1;
+  }
+
+  .lesson-focus-row {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 36em) {
+  .next-lesson-card,
+  .dashboard-card,
+  .summary-card {
+    padding: 16px;
+  }
+
+  .lesson-row .mantine-Group-root,
+  .data-row .mantine-Group-root {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .lesson-time {
+    width: auto;
+  }
+
+  .right-data {
+    justify-items: start;
   }
 }
