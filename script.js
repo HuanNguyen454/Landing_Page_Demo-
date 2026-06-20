@@ -43,13 +43,14 @@ if (!("IntersectionObserver" in window) || shouldReduceMotion) {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("in-view");
-          revealObserver.unobserve(entry.target);
+        } else {
+          entry.target.classList.remove("in-view");
         }
       });
     },
     {
-      rootMargin: "0px 0px -12% 0px",
-      threshold: 0.16,
+      rootMargin: "-8% 0px -12% 0px",
+      threshold: 0.12,
     }
   );
 
